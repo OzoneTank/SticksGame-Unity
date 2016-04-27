@@ -6,20 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-	public GameObject stick;
-	private GameObject currentStick;
-	private List<GameObject> sticks = new List<GameObject>();
 	public float playerOffsetHeight = 2.0f;
-	public Vector3 stickOffset = new Vector3 (2, 0, 0);
-	private float stickRotation = 0;
 	public float startStickRotationSpeed = 30f;
-	private float stickRotationSpeed = 30f;
 	public float stickRotationSpeedDelta = 0.5f;
-
+	public GameObject stick;
+	private GameState gameState = GameState.Generating;
 	public int numOfSticksToSwitchColor = 10;
 	public int numOfSticksSinceColorChange = 0;
-
 	public Text score;
+	public Vector3 stickOffset = new Vector3 (2, 0, 0);
+
+	private GameObject currentStick;
+	private float stickRotation = 0;
+	private float stickRotationSpeed = 30f;
+	private List<GameObject> sticks = new List<GameObject>();
 
 	private enum GameState {
 		Start,
@@ -29,8 +29,6 @@ public class Player : MonoBehaviour {
 		GameOver
 	}
 
-	private GameState gameState = GameState.Generating;
-
 	void Start() {
 		sticks.AddRange (GameObject.FindGameObjectsWithTag ("Stick"));
 		stickRotationSpeed = startStickRotationSpeed;
@@ -39,7 +37,7 @@ public class Player : MonoBehaviour {
 	public void Restart() {
 		SceneManager.LoadScene ("MainScene");
 	}
-	// Update is called once per frame
+
 	void Update () {
 		switch (gameState) {
 		case GameState.Generating:
@@ -95,7 +93,6 @@ public class Player : MonoBehaviour {
 	}
 
 	private void MoveOverHighestStick() {
-
 		float maxY = 0;
 		for(int i = 0; i < sticks.Count; i++) {
 			float y = sticks [i].transform.position.y;

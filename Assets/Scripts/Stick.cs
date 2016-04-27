@@ -7,7 +7,7 @@ public class Stick : MonoBehaviour {
 	private bool hasCollided = false;
 
 	void Start() {
-		gameObject.GetComponent<Renderer> ().material.color = new Color(
+		gameObject.GetComponent<Renderer>().material.color = new Color(
 			Random.Range (0, 1.0f),
 			Random.Range (0, 1.0f),
 			Random.Range (0, 1.0f)
